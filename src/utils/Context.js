@@ -33,15 +33,14 @@ const Context = () => {
 
     const getUser = async (username) => {
 
-        Promise.all([
-            fetch(`https://api.github.com/users/${username}`, {
-                method: 'GET',
-                headers: { "Content-Type": "application/json" }
-            }),
-            fetch(`https://api.github.com/users/${username}/repos`, {
-                method: 'GET',
-                headers: { "Content-Type": "application/json" }
-            })
+        const options = {
+            method: 'GET',
+            headers: { "Content-Type": "application/json" }
+        }
+
+        await Promise.all([
+            fetch(`https://api.github.com/users/${username}`, options),
+            fetch(`https://api.github.com/users/${username}/repos`, options)
         ]).then(responses => {
             return Promise.all(responses.map(function (response) {
                 if (!(response.status == 200)) {
@@ -56,7 +55,7 @@ const Context = () => {
             const sortedArr = data[1].sort((a, b) => (a.created_at < b.created_at ? 1 : -1))
             setIsLoading(false)
             setUser({ ...user, info: data[0], repoArr: sortedArr })
-        })
+        }).catch((err) => console.log(err))
 
     }
 
