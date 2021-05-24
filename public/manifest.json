@@ -1,0 +1,9 @@
+{
+  "short_name": "Find My Octo",
+  "name": "Find My Octo",
+  "icons": [],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
