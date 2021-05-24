@@ -53,8 +53,9 @@ const Context = () => {
                 }
             }))
         }).then(data => {
+            const sortedArr = data[1].sort((a, b) => (a.created_at < b.created_at ? 1 : -1))
             setIsLoading(false)
-            setUser({ ...user, info: data[0], repoArr: data[1] })
+            setUser({ ...user, info: data[0], repoArr: sortedArr })
         })
 
     }

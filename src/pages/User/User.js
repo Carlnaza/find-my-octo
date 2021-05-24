@@ -122,7 +122,7 @@ export default function User({ match }) {
                         >
                             <UserRepoCardData>
                                 <UserRepoCardText color="none">
-                                    <FontAwesomeIcon icon={faCircle} size="xs" /> {language}
+                                    <FontAwesomeIcon icon={faCircle} size="xs" /> {language ? language : "Other"}
                                 </UserRepoCardText>
                                 <UserRepoCardText>
                                     <FontAwesomeIcon icon={faStar} size="xs" /> {stars}
@@ -141,7 +141,7 @@ export default function User({ match }) {
         )
     }
 
-    
+    let sortedData = user.repoArr.sort((a, b) => a.updated_at - b.updated_at)
     return (
         <>
             <Navbar />
@@ -167,10 +167,10 @@ export default function User({ match }) {
                             >
                                 <Container margin="3%" padding={0}>
                                     <DashboardContainer>
-                                        <DashboardTitle>{user.info.login}'s Repos</DashboardTitle>
+                                        <DashboardTitle>{user.info.login}'s Recent Repos</DashboardTitle>
                                         <Row>
                                             {
-                                                user.repoArr.length > 1 ? user.repoArr.slice(0, 6).map((data, i) => (
+                                                user.repoArr.length > 1 ? sortedData.slice(0, 6).map((data, i) => (
                                                     <Col
                                                         xl={6}
                                                         lg={6}
